@@ -1,66 +1,59 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import React, { useState } from 'react'
+import axios from 'axios'
 const FormComponent = () => {
   // Initial form data
   const initialFormData = {
-    firstName: "",
-    lastName: "",
-    favoriteLanguage: "",
+    firstName: '',
+    lastName: '',
+    favoriteLanguage: '',
     isStudent: false,
-  };
+  }
   // State to store the form data
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState(initialFormData)
 
   // Handle input changes
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked } = e.target
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+      [name]: type === 'checkbox' ? checked : value,
+    })
+  }
 
   // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    console.log("Form Data:", formData);
-
+    e.preventDefault() // Prevent the default form submission behavior
+    console.log('Form Data:', formData)
 
     // send data to server
-    /* const sendData = async () => {
+    const sendData = async () => {
       try {
-        const response = await fetch('http://localhost:3002/user'
-          , {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body:JSON.stringify(formData)  // Json format
-          })
+        const response = await fetch('http://localhost:3002/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData), // Json format
+        })
 
-        const data = await response.json();
-        console.log("server repond", data)
-
+        const data = await response.json()
+        console.log('server repond', data)
       } catch (error) {
         console.log(error.message)
       }
     }
- */
-
-
 
     // using axios
 
-    const sendData = async () => {
-     const response = await  axios.post('http://localhost:3002/user',formData) // react to json
-     console.log(response.data)
-    }
-
+    // const sendData = async () => {
+    //  const response = await  axios.post('http://localhost:3002/user',formData) // react to json
+    //  console.log(response.data)
+    // }
 
     sendData()
 
-    setFormData(initialFormData); // Reset form data
-  };
+    setFormData(initialFormData) // Reset form data
+  }
 
   return (
     <div className="container w-[50%] border-2 rounded-2xl shadow-lg shadow-cyan-400 ">
@@ -72,7 +65,8 @@ const FormComponent = () => {
         <div>
           <label
             htmlFor="firstName"
-            className="block text-lg font-medium text-lime-400 pb-2">
+            className="block text-lg font-medium text-lime-400 pb-2"
+          >
             First Name
           </label>
           <input
@@ -88,7 +82,8 @@ const FormComponent = () => {
         <div>
           <label
             htmlFor="lastName"
-            className="block text-lg font-medium  text-lime-400 pb-2">
+            className="block text-lg font-medium  text-lime-400 pb-2"
+          >
             Last Name
           </label>
           <input
@@ -104,7 +99,8 @@ const FormComponent = () => {
         <div>
           <label
             htmlFor="favoriteLanguage"
-            className="block text-lg font-medium  text-lime-400 pb-2">
+            className="block text-lg font-medium  text-lime-400 pb-2"
+          >
             Favorite Coding Language
           </label>
           <select
@@ -113,7 +109,8 @@ const FormComponent = () => {
             required
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-yellow-200 sm:text-sm rounded-md"
             value={formData.favoriteLanguage}
-            onChange={handleChange}>
+            onChange={handleChange}
+          >
             <option value="">Select a Language</option>
             <option value="JavaScript">JavaScript</option>
             <option value="Python">Python</option>
@@ -133,18 +130,20 @@ const FormComponent = () => {
           />
           <label
             htmlFor="isStudent"
-            className="ml-2 block text-lg font-medium  text-lime-400 pb-2">
+            className="ml-2 block text-lg font-medium  text-lime-400 pb-2"
+          >
             Is Student
           </label>
         </div>
         <button
           type="submit"
-          className="py-2 px-4 text-slate-900 bg-yellow-200 font-bold rounded-md hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all">
+          className="py-2 px-4 text-slate-900 bg-yellow-200 font-bold rounded-md hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all"
+        >
           Submit
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default FormComponent;
+export default FormComponent
